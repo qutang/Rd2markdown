@@ -94,6 +94,15 @@ Rd2markdown.rd <- function(rd,
 						cat(section.sep, file=outfile, append=TRUE)
 						cat(paste0(results[[i]]), file=outfile, append=TRUE)
 						cat(section.sep, file=outfile, append=TRUE)					
+					} else if(i %in% c('arguments')){
+					  cat(paste(section[1], simpleCap(i), section[2]), 
+					      file=outfile, append=TRUE)
+					  cat(section.sep, file=outfile, append=TRUE)
+					  for(index in 1:length(results[[i]])){
+					    cat(paste0("* `", names(results[[i]][index]), "`", ": ", results[[i]][[index]], "\n"),
+					        file=outfile, append=TRUE)
+					  }
+					  cat(section.sep, file=outfile, append=TRUE)
 					} else {
 						cat(paste(section[1], simpleCap(i), section[2]), 
 							file=outfile, append=TRUE)

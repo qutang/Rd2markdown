@@ -33,10 +33,11 @@ parseRd <- function(rd, link.ext) {
 				}
 				results$arguments <- params
 			} else if(i %in% c('\\usage')) {
-				results[['usage']] <- paste('    ', sapply(rd[[which(tags == '\\usage')]], 
+				results[['usage']] <- paste(sapply(rd[[which(tags == '\\usage')]], 
 						   FUN=function(x) {
 						   parseTag(x, stripNewline=FALSE, link.ext=link.ext)
-						   }), collapse='')
+						   }),collapse='')
+				results[['usage']] <- paste0("```r", results[['usage']], "```")
 			} else if(i %in% tags) {
 				key <- substr(i, 2, nchar(i))
 				results[[key]] <- paste(sapply(rd[[which(tags==i)]], FUN=function(x) {
